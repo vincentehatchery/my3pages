@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block content %}
+	<div>Welcome back - please begin typing
+		<p> Today is : </p>
+	</div>
+	<table>
+		<thead>
+			<tr>
+				<th>ID</th>
+				<th>Date Entered</th>
+			</tr>
+		</thead>
+		<tbody>
+			{% for entry in entries %}
+			{% set entry_id = entry.key.id() %}
+			<tr>
+				<td>{{ entry_id }}</td>
+				<td>{{ entry.date_entered }}</td>
+				<td>{{ entry.username }}</td>
+			</tr>
+			{% else %}
+			<tr>
+				<td>No entries yet</td>
+			</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+{% endblock %}
