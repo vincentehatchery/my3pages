@@ -4,7 +4,14 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<title>
 	{% block title %}My 3 pages{% endblock %}
-	</title>
+	</title>	
+	<nav>
+		<ul>
+			<li><a href="/">home</a>
+			<li><a href="/write">write</a>
+			<li><a href="/previous_entries">previous entries</a>
+		</ul>
+	</nav>
 </head>
 <body>
 	{% block content %}

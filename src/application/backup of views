@@ -29,6 +29,7 @@ def home_page():
 @login_required
 def write_entry():
     todays_date = datetime.date.today()
+    #.strftime('%y-%m-%d')
     username = users.get_current_user()
     
     form = My3PagesEntryForm()
@@ -40,7 +41,9 @@ def write_entry():
         # Create a new entry
         entry = My3PagesEntry(username = users.get_current_user(), date_entered = datetime.date.today())
     else:
+        # Display the existing entry in the form
         entry = result
+        form.daily_entry.process_data(entry.daily_entry)
         # http://stackoverflow.com/questions/5117479/wtforms-how-to-prepopulate-a-textarea-field
                               
     new_key_id = entry.key
@@ -48,9 +51,6 @@ def write_entry():
     print "new key id %s", new_key_id 
     
     if request.method == 'GET':
-        # Display the existing entry in the form if it exists
-        form.daily_entry.process_data(entry.daily_entry)
-    
         return render_template('write.html', form=form, entry = entry)
     
     elif request.method == 'POST':

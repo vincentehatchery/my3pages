@@ -11,4 +11,4 @@ from flaskext import wtf
 from flaskext.wtf import validators
 
 class My3PagesEntryForm(wtf.Form):
-    entry = wtf.TextAreaField('Entry', validators=[validators.Required()])
+    daily_entry = wtf.TextAreaField('DailyEntry', validators=[validators.Required()])
