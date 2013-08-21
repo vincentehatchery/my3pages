@@ -21,9 +21,21 @@ cache = Cache(app)
 
 @app.route('/')
 def home_page():
-    return render_template('home.html')
+    username = users.get_current_user()
+    return render_template('home.html', username=username)
 
-#
+@app.route('/logout/')
+def logout_page():
+    if users.get_current_user():
+        return redirect(users.create_logout_url('/logged_out'))
+    else:
+        return redirect('/')
+
+@app.route('/logged_out/')
+def loggedout_page():
+    if not users.get_current_user():
+        return  render_template('logged_out.html')
+
 
 @app.route('/write/', methods = ['GET', 'POST'])
 @login_required
@@ -51,7 +63,7 @@ def write_entry():
         # Display the existing entry in the form if it exists
         form.daily_entry.process_data(entry.daily_entry)
     
-        return render_template('write.html', form=form, entry = entry)
+        return render_template('write.html', form=form, entry = entry, username=username)
     
     elif request.method == 'POST':
         #form = My3PagesEntryForm()
@@ -62,7 +74,7 @@ def write_entry():
             #new_entry = My3PagesEntry(username = users.get_current_user(), daily_entry = form['entry'].data)
             entry.put()
             flash('Entry saved')
-            return render_template('write.html',form=form, entry = entry)
+            return render_template('write.html',form=form, entry = entry, username=username)
         
 @app.route('/previous_entries/')
 @login_required
@@ -70,8 +82,8 @@ def previous_enties():
     
     username = users.get_current_user()
     
-    entries = My3PagesEntry.query()
+    entries = My3PagesEntry.gql("WHERE username =:username", username = username)
     
-    return render_template('previous_entries.html', entries = entries)
+    return render_template('previous_entries.html', entries = entries, username=username)
     
     

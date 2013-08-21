@@ -1,20 +1,41 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 	<head>
-	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-	<title>
-	{% block title %}My 3 pages{% endblock %}
-	</title>	
-	<nav>
-		<ul>
-			<li><a href="/">home</a>
-			<li><a href="/write">write</a>
-			<li><a href="/previous_entries">previous entries</a>
-		</ul>
-	</nav>
-</head>
-<body>
-	{% block content %}
-	{% endblock %}
-</body>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<title>{% block title %}My 3 Pages{% endblock %}</title>
+		<link href="/static/css/main.css" rel=stylesheet>
+	</head>
+		
+	<body>
+		<header>
+			<div class="navbar">
+				<nav id="menu">
+					{% if not username %}
+					{% set username = "guest" %}
+					{% endif %}
+					<ul>
+						<li><a class="logo" href="/">My 3 Pages</a>
+						<li><a href="/write">write</a>
+						<li><a href="/previous_entries">previous entries</a>
+						<li><a href="/inspiration">inspiration</a>
+						<li>
+							<a href="#">{{ username }}</a>
+							<ul>
+								<li><a href="/logout">> logout</a></li>
+							</ul>
+						</li>	
+							
+					</ul>
+					</nav>
+					
+			</div>
+		</header>
+		
+		
+		<article>
+			{% block content %}
+			{% endblock %}
+		</article>
+	
+	</body>
 </html>

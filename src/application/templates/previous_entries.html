@@ -1,23 +1,20 @@
 {% extends "base.html" %}
 
 {% block content %}
-	<div>Welcome back - please begin typing
-		<p> Today is : </p>
-	</div>
+	<h2>Feeling nostalgic?  Here is a list of previous entries you've written:</h2>
 	<table>
 		<thead>
 			<tr>
-				<th>ID</th>
 				<th>Date Entered</th>
+				<th>Begins with ...</th>
 			</tr>
 		</thead>
 		<tbody>
 			{% for entry in entries %}
 			{% set entry_id = entry.key.id() %}
 			<tr>
-				<td>{{ entry_id }}</td>
-				<td>{{ entry.date_entered }}</td>
-				<td>{{ entry.username }}</td>
+				<td><a href="/write/{{ entry_id }}">{{ entry.date_entered }}</a></td>
+				<td>{{ entry.daily_entry }}</td>
 			</tr>
 			{% else %}
 			<tr>

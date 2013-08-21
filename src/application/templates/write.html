@@ -1,10 +1,10 @@
 {% extends "base.html" %}
 
 {% block content %}
-	<div>Welcome back - please begin typing
-		<p> Today is : </p>
-		<p> {{ entry.date_entered }} </p>
-	</div>
+	<h2>Welcome back - please begin typing</h2>
+	
+	<p> Today is : {{ entry.date_entered }} </p>
+	
 	
 	
 	<form action="{{ url_for('write_entry') }}" method="post" accept-charset="utf-8">
