@@ -86,4 +86,10 @@ def previous_enties():
     
     return render_template('previous_entries.html', entries = entries, username=username)
     
+@app.route('/inspiration/')
+def inspiration_page():
     
+    username = users.get_current_user()
+    
+    return render_template('inspiration.html', username=username)
+ 
