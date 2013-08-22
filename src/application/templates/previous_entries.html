@@ -13,7 +13,7 @@
 			{% for entry in entries %}
 			{% set entry_id = entry.key.id() %}
 			<tr>
-				<td><a href="/write/{{ entry_id }}">{{ entry.date_entered }}</a></td>
+				<td><a href="/previous_entries/{{ entry_id }}">{{ entry.date_entered }}</a></td>
 				<td>{{ entry.daily_entry }}</td>
 			</tr>
 			{% else %}

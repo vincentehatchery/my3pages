@@ -11,7 +11,7 @@ from application import app
 from decorators import login_required
 from models import My3PagesEntry
 from forms import My3PagesEntryForm
-from flask import render_template, request, flash, redirect, url_for
+from flask import render_template, request, flash, redirect
 import datetime
 from flask_cache import Cache
 from google.appengine.api import users
@@ -93,3 +93,12 @@ def inspiration_page():
     
     return render_template('inspiration.html', username=username)
  
+@app.route('/previous_entries/<int:entry_id>')
+def previous_entries_edit(entry_id):
+    entry = My3PagesEntry.get_by_id(entry_id)
+    form = My3PagesEntryForm()
+    
+    form.daily_entry.process_data(entry.daily_entry)
+    
+    return render_template('write.html',form=form, entry=entry, username=entry.username)
+    
