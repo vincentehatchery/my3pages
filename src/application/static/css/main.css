@@ -16,15 +16,15 @@ body {
 	
 }
 #menu {
-	padding: 1em 10em;
+	padding: 1em 9em;
 	background-color: #000000;
 	height: 2em;
 	line-height: 2em;
 }
 
 article {
-	padding-left: 10em;
-	padding-right: 10em;
+	padding-left: 9em;
+	padding-right: 9em;
 	padding-top:0;
 	padding-bottom:0;	
 	margin:0;
@@ -76,15 +76,6 @@ ul, ul li {
 	_width: 100%; /* Hack for IE6 */
 }
 
-
-
-
-/*
-ul {
-	list-style: none outside none;
-	
-}
-
 /* Now implement dropdown */
 #menu li:hover ul {
 	display:block;
@@ -127,7 +118,7 @@ aa:hover {
 textarea {
 	float: none;
 	font-size: 1em;
-	width: 100%;
+	font-family: "American Typewriter", "Ariel";	width: 100%;
 	height: 20em;
 	resize: none;
 	-webkit-box-sizing: border-box;
@@ -135,7 +126,13 @@ textarea {
             box-sizing: border-box;
 }
 
+#finalcount{
+		font-family: "American Typewriter", "Ariel";
+}
 
+.stats {
+	color: red;
+}
 
 
 

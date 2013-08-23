@@ -4,13 +4,10 @@
 	<h2>Welcome back - please begin typing</h2>
 	
 	<p> Entry for : {{ entry.date_entered }} </p>
-	
-	
-	
+	<span id="finalcount" class="stats">0</span><span> words written and </span><span id='perecent_complete' class="stats"></span><span> % complete</span>
 	<form action="{{ url_for('write_entry') }}" method="post" accept-charset="utf-8">
 		{{ form.csrf_token }}
 		<p>
-		<label for="daily_entry">{{ form.daily_entry.label }}</label>
 	
 		{{ form.daily_entry|safe }}
 	

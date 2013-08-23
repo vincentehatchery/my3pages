@@ -4,6 +4,8 @@
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 		<title>{% block title %}My 3 Pages{% endblock %}</title>
 		<link href="/static/css/main.css" rel=stylesheet>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+	
 	</head>
 		
 	<body>
@@ -36,6 +38,14 @@
 			{% block content %}
 			{% endblock %}
 		</article>
-	
+		 
+		 <footer>
+	        <div id="footer" class="container">
+	            {% block footer %}{% endblock %}
+	        </div><!-- /footer -->
+    	</footer>
+		
+	    <script src="/static/js/jquery.wordcount.js"></script>
+			
 	</body>
 </html>
