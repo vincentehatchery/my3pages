@@ -7,14 +7,48 @@ body {
 	padding: 0;
 	margin: 0;
 	height: 100%;
-	font-family: "American Typewriter", "Courier New";
+	font-family: "American Typewriter", "Helvetica";
 }
+
+article {
+	padding: 0em 9em;
+	margin:0;
+}
+
 .logo {
-	float: left;
+	
 	font-size: 2em;
 	font-weight: 400;
 	
 }
+
+#menu ul {
+	margin: 0;
+	padding: 0;
+	whitespace: nowrap;
+}
+
+#menu li {
+	margin: 0;
+	padding: 0;
+}
+
+
+#menu a {
+	margin: 0;
+	padding: 0;
+}
+
+#menu ul{
+	margin: 0;
+	padding: 0;
+	list-style: none outside;	
+}
+
+#menu a{
+	text-decoration: none;
+}
+
 #menu {
 	padding: 1em 9em;
 	background-color: #000000;
@@ -22,27 +56,15 @@ body {
 	line-height: 2em;
 }
 
-article {
-	padding-left: 9em;
-	padding-right: 9em;
-	padding-top:0;
-	padding-bottom:0;	
-	margin:0;
+#menu ul {
+		margin: 0;
+		padding: 0;
+		white-space:nowrap;
 }
-/* Implement Drop Down menu in CSS */
-/* Remove the default settings */
-ul, ul li {
-	margin: 0;
-	padding: 0;
-	list-style: none outside;
-	
-}
-
-/* Make the menu items horizontal */
-
-#menu li{;
-	position: relative;
-	float: left;
+#menu ul li{
+	font-size: 1em;
+	display:inline-block;
+	margin-right: 1em;
 }
 
 #menu li a{
@@ -50,14 +72,13 @@ ul, ul li {
 	background: transparent;
 	display: block;
 	font-weight: 50;
-	vertical-align:text-bottom;	
+
 }
 
 #menu li.open a{
 	background: #aaa;
 }
 
-/* Submenus are aligned to the left of their parents */
 #menu li ul {
 	position: absolute;
 	display: none;
@@ -67,16 +88,13 @@ ul, ul li {
 #menu li li {
 	float: none;
 	white-space: nowrap;
-	zoom: 1; /* force hasLayout in IE */
-}
+	zoom: 1; }
 
-/* IE needs a little help displaying submenu links */
 #menu li li a {
 	zoom: 1;
-	_width: 100%; /* Hack for IE6 */
+	_width: 100%; 
 }
 
-/* Now implement dropdown */
 #menu li:hover ul {
 	display:block;
 	background: black;
@@ -88,32 +106,17 @@ ul, ul li {
 }
 
 
-a:link, a:visited {
+
+#menu a:link, a:visited {
 		color: #BDBDBD;
 		text-decoration: none;
 }
-a:hover {
+#menu a:hover {
 		color: #FFFFFF;
 		text-decoration: none;
 }
-/*
 
-li {
-	display: inline-block;
-	text-align: center;
-	padding: 0 10px;
 
-}
-
-a:link, a:visited {
-		color: #999999;
-		text-decoration: none;
-}
-aa:hover {
-		color: #FFFFFF;
-		text-decoration: none;
-}
-*/
 
 textarea {
 	float: none;
@@ -121,18 +124,36 @@ textarea {
 	font-family: "American Typewriter", "Ariel";	width: 100%;
 	height: 20em;
 	resize: none;
-	-webkit-box-sizing: border-box;
-       -moz-box-sizing: border-box;
-            box-sizing: border-box;
+	
 }
 
 #finalcount{
-		font-family: "American Typewriter", "Ariel";
+		font-family: "American Typewriter", "Helvetica";
 }
 
 .stats {
 	color: red;
 }
+
+header {
+	height:1%;
+	overflow:hidden;
+}
+@media only screen and (max-device-width: 480px) {
+
+article{
+	padding: 1em 1em;
+	font-size: 1.5em;
+}
+#menu{
+	padding: 1em;
+	font-size: 1.5em;
+	margin:0;
+}
+
+	
+}
+
 
 
 
