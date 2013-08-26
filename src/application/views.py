@@ -56,8 +56,7 @@ def write_entry():
         entry = result
         # http://stackoverflow.com/questions/5117479/wtforms-how-to-prepopulate-a-textarea-field
                               
-    new_key_id = entry.key
-    
+    #new_key_id = entry.key
     #print "new key id %s", new_key_id 
  
     if request.method == 'GET':
@@ -73,7 +72,8 @@ def write_entry():
             entry.daily_entry = form['daily_entry'].data
             
             entry.put()
-            flash('Entry successfully saved')
+            todays_datetime = datetime.datetime.today()
+            flash(u"Entry last saved:%s" % (todays_datetime))
             return render_template('write.html',form=form, entry = entry, username=username)
         
 @app.route('/previous_entries/')

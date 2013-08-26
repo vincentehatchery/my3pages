@@ -14,7 +14,8 @@
 			{% set entry_id = entry.key.id() %}
 			<tr>
 				<td><a href="/previous_entries/{{ entry_id }}">{{ entry.date_entered }}</a></td>
-				<td>{{ entry.daily_entry }}</td>
+				{% set short_entry = entry.daily_entry[:75] %}
+				<td>{{ short_entry }}</td>
 			</tr>
 			{% else %}
 			<tr>

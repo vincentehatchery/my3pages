@@ -7,7 +7,7 @@ body {
 	padding: 0;
 	margin: 0;
 	height: 100%;
-	font-family: "American Typewriter", "Helvetica";
+	font-family: "American Typewriter", "Verdana";
 }
 
 article {
@@ -131,14 +131,15 @@ article {
 textarea {
 	float: none;
 	font-size: 1em;
-	font-family: "American Typewriter", "Ariel";	width: 100%;
+	font-family: "American Typewriter", "Verdana";
+	width: 100%;
 	height: 20em;
 	resize: none;
 	
 }
 
 input#save_button{
-	font-family: "American Typewriter", "Helvetica";
+	font-family: "American Typewriter", "Verdana";
 	cursor:pointer; /*forces the cursor to change to a hand when the button is hovered*/
 	padding:0.1em 0.5em; /*add some padding to the inside of the button*/
 	background:red; /*the colour of the button*/
@@ -154,6 +155,7 @@ input#save_button{
 	/*style the text*/
 	color:#f3f3f3;
 	font-size:1em;
+	
 }
 
 input#save_button:hover, input#gobutton:focus{
@@ -166,7 +168,7 @@ input#save_button:hover, input#gobutton:focus{
 
 
 #finalcount{
-		font-family: "American Typewriter", "Helvetica";
+		font-family: "American Typewriter", "Verdana";
 }
 
 .stats {
@@ -188,7 +190,6 @@ header {
     font-weight: bold;
     text-shadow: 1px 1px 0 #fff;
   }
-  
   
 @media only screen and (max-device-width: 480px) {
 
