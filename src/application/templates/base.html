@@ -3,9 +3,11 @@
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 		<title>{% block title %}My 3 Pages{% endblock %}</title>
+		<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
 		<link href="/static/css/main.css" rel=stylesheet>
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-	
+		<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
+		
 	</head>
 		
 	<body>
@@ -21,9 +23,9 @@
 						<li><a href="/previous_entries">Previous entries</a>
 						<li><a href="/inspiration">Inspiration</a>
 						<li>
-							<a href="#">{{ username }}</a>
+							<a href="#" id="submenu">{{ username }}</a>
 							<ul>
-								<li><a href="/logout"> logout</a></li>
+								<li><a href="/logout">logout</a></li>
 							</ul>
 						</li>	
 							
@@ -37,11 +39,31 @@
 		<article>
 			{% block content %}
 			{% endblock %}
+			
+			{% with messages = get_flashed_messages() %}
+  			{% if messages %}
+    			{% for message in messages %}
+    		
+    			<h3 id="message" href=#>{{ message }}</h3>
+    			
+      			
+    			{% endfor %}
+    		{% endif %}
+			{% endwith %}
+						
 		</article>
 		 
 		 <footer>
 	        <div id="footer" class="container">
-	            {% block footer %}{% endblock %}
+	        	{% block footer %}{% endblock %}
+	           	<script>
+					(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+				  	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+				  	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+				  	})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+				  	ga('create', 'UA-43478549-1', 'my3pages.appspot.com');
+				  	ga('send', 'pageview');
+				</script>
 	        </div><!-- /footer -->
     	</footer>
 		

@@ -1,5 +1,11 @@
+//Initialise
+$("#progressbar").progressbar({value: 1});
+
 $(function() {
+	var percentComplete=0;
     var wordCounts = {};
+    progressLabel = $( ".progress-label" );
+    
     $("textarea").keyup(function() {
         var matches = this.value.match(/\b/g);
         wordCounts[this.id] = matches ? matches.length / 2 : 0;
@@ -10,10 +16,11 @@ $(function() {
         $('#finalcount').html(finalCount);
         percentComplete = finalCount/750*100;
         percentComplete = percentComplete.toFixed(2);
-        $('#perecent_complete').html(percentComplete);
+        $('#percent_complete').html(percentComplete);
         
-        //$('#finalcount').html(finalCount + " words written and " + perecentComplete +"% complete");
-        
+  
+        $("#progressbar").progressbar("value", parseInt(percentComplete));
+        progressLabel.text( progressbar.progressbar( "value" ) + "%" );
         
     }).keyup();
 });

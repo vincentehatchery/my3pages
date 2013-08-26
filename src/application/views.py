@@ -16,6 +16,7 @@ import datetime
 from flask_cache import Cache
 from google.appengine.api import users
 
+    
 
 cache = Cache(app)
 
@@ -57,8 +58,8 @@ def write_entry():
                               
     new_key_id = entry.key
     
-    print "new key id %s", new_key_id 
-    
+    #print "new key id %s", new_key_id 
+ 
     if request.method == 'GET':
         # Display the existing entry in the form if it exists
         form.daily_entry.process_data(entry.daily_entry)
@@ -71,9 +72,8 @@ def write_entry():
             
             entry.daily_entry = form['daily_entry'].data
             
-            #new_entry = My3PagesEntry(username = users.get_current_user(), daily_entry = form['entry'].data)
             entry.put()
-            flash('Entry saved')
+            flash('Entry successfully saved')
             return render_template('write.html',form=form, entry = entry, username=username)
         
 @app.route('/previous_entries/')

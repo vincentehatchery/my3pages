@@ -65,6 +65,7 @@ article {
 	font-size: 1em;
 	display:inline-block;
 	margin-right: 1em;
+	cursor: pointer;
 }
 
 #menu li a{
@@ -88,7 +89,8 @@ article {
 #menu li li {
 	float: none;
 	white-space: nowrap;
-	zoom: 1; }
+	zoom: 1;
+}
 
 #menu li li a {
 	zoom: 1;
@@ -98,25 +100,33 @@ article {
 #menu li:hover ul {
 	display:block;
 	background: black;
-	width: 90%;
+	width: 3em;
 	border: 1px solid white;
 	color:black;
 	padding:0.1em 0.5em;
+	float: none;
+		-webkit-box-shadow: 0 0 1px rgba(0,0,0, .75);
+	-moz-box-shadow: 0 0 1px rgba(0,0,0, .75);
+	box-shadow: 0 0 1px rgba(0,0,0, .75);
+	
 	
 }
 
 
-
 #menu a:link, a:visited {
-		color: #BDBDBD;
-		text-decoration: none;
+	color: #BDBDBD;
+	text-decoration: none;
 }
 #menu a:hover {
-		color: #FFFFFF;
-		text-decoration: none;
+	color: #FFFFFF;
+	text-decoration: none;
 }
 
-
+#submenu li li {
+	width: 4em;
+	position: absolute;
+	float:none;
+}
 
 textarea {
 	float: none;
@@ -126,6 +136,34 @@ textarea {
 	resize: none;
 	
 }
+
+input#save_button{
+	font-family: "American Typewriter", "Helvetica";
+	cursor:pointer; /*forces the cursor to change to a hand when the button is hovered*/
+	padding:0.1em 0.5em; /*add some padding to the inside of the button*/
+	background:red; /*the colour of the button*/
+	border:1px solid red; /*required or the default border for the browser will appear*/
+	/*give the button curved corners, alter the size as required*/
+	-moz-border-radius: 10px;
+	-webkit-border-radius: 10px;
+	border-radius: 10px;
+	/*give the button a drop shadow*/
+	-webkit-box-shadow: 0 0 4px rgba(0,0,0, .75);
+	-moz-box-shadow: 0 0 4px rgba(0,0,0, .75);
+	box-shadow: 0 0 4px rgba(0,0,0, .75);
+	/*style the text*/
+	color:#f3f3f3;
+	font-size:1em;
+}
+
+input#save_button:hover, input#gobutton:focus{
+	color:#f3f3f3;
+	/*reduce the drop shadow size to give a pushed button effect*/
+	-webkit-box-shadow: 0 0 1px rgba(0,0,0, .75);
+	-moz-box-shadow: 0 0 1px rgba(0,0,0, .75);
+	box-shadow: 0 0 1px rgba(0,0,0, .75);
+}
+
 
 #finalcount{
 		font-family: "American Typewriter", "Helvetica";
@@ -139,20 +177,31 @@ header {
 	height:1%;
 	overflow:hidden;
 }
+
+  .ui-progressbar {
+    position: relative;
+  }
+  .progress-label {
+    position: absolute;
+    left: 50%;
+    top: 4px;
+    font-weight: bold;
+    text-shadow: 1px 1px 0 #fff;
+  }
+  
+  
 @media only screen and (max-device-width: 480px) {
 
-article{
-	padding: 1em 1em;
-	font-size: 1.5em;
-}
-#menu{
-	padding: 1em;
-	font-size: 1.5em;
-	margin:0;
-}
-
-	
-}
+	article{
+		padding: 1em 1em;
+		font-size: 1.5em;
+	}
+	#menu{
+		padding: 1em;
+		font-size: 1.5em;
+		margin:0;
+	}
+} 
 
 
 
