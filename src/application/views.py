@@ -92,6 +92,13 @@ def inspiration_page():
     username = users.get_current_user()
     
     return render_template('inspiration.html', username=username)
+
+@app.route('/feedback/')
+def feedback_page():
+    
+    username = users.get_current_user()
+    
+    return render_template('feedback.html', username=username)
  
 @app.route('/previous_entries/<int:entry_id>')
 def previous_entries_edit(entry_id):

@@ -100,7 +100,7 @@ article {
 #menu li:hover ul {
 	display:block;
 	background: black;
-	width: 3em;
+	width: auto;
 	border: 1px solid white;
 	color:black;
 	padding:0.1em 0.5em;
@@ -108,9 +108,8 @@ article {
 		-webkit-box-shadow: 0 0 1px rgba(0,0,0, .75);
 	-moz-box-shadow: 0 0 1px rgba(0,0,0, .75);
 	box-shadow: 0 0 1px rgba(0,0,0, .75);
-	
-	
 }
+
 
 
 #menu a:link, a:visited {
@@ -122,10 +121,14 @@ article {
 	text-decoration: none;
 }
 
-#submenu li li {
-	width: 4em;
-	position: absolute;
+#menu li ul li
+{
 	float:none;
+	display: block;
+}
+
+td a:link {
+	color: black;
 }
 
 textarea {
