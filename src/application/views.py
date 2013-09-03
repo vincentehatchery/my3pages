@@ -13,7 +13,7 @@ from models import My3PagesEntry
 from forms import My3PagesEntryForm
 from flask import render_template, request, flash, redirect
 import datetime
-from dateutil import tz
+#from dateutil import tz
 import time
 from flask_cache import Cache
 from google.appengine.api import users
@@ -58,10 +58,10 @@ def loggedout_page():
 def write_entry():
     todays_date = datetime.date.today()
     
-    todays_date_local = tz.tzlocal()
+    #todays_date_local = tz.tzlocal()
     
-    print "today's local date %s", todays_date_local
-    print "today's local time %s", time.localtime()
+    #print "today's local date %s", todays_date_local
+    #print "today's local time %s", time.localtime()
     
     username = users.get_current_user()
     
