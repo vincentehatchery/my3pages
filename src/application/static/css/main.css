@@ -141,7 +141,7 @@ textarea {
 	
 }
 
-input#save_button{
+input#save_button, input#start_button{
 	font-family: "American Typewriter", "Verdana";
 	cursor:pointer; /*forces the cursor to change to a hand when the button is hovered*/
 	padding:0.1em 0.5em; /*add some padding to the inside of the button*/
@@ -183,17 +183,19 @@ header {
 	overflow:hidden;
 }
 
-  .ui-progressbar {
+.ui-progressbar {
     position: relative;
-  }
-  .progress-label {
+}
+  
+.progress-label {
     position: absolute;
     left: 50%;
     top: 4px;
     font-weight: bold;
     text-shadow: 1px 1px 0 #fff;
-  }
-  
+}
+
+
 @media only screen and (max-device-width: 480px) {
 
 	article{

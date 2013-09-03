@@ -13,8 +13,11 @@ from models import My3PagesEntry
 from forms import My3PagesEntryForm
 from flask import render_template, request, flash, redirect
 import datetime
+from dateutil import tz
+import time
 from flask_cache import Cache
 from google.appengine.api import users
+
 
     
 
@@ -23,7 +26,19 @@ cache = Cache(app)
 @app.route('/')
 def home_page():
     username = users.get_current_user()
-    return render_template('home.html', username=username)
+    return render_template('index.html', username=username)
+
+@app.route('/about/')
+def about_page():
+    username = users.get_current_user()
+    return render_template('about.html', username=username)
+
+@app.route('/login/')
+def login_page():
+    if (not users.get_current_user()):
+        return redirect(users.create_login_url('/write'))
+    else:
+        return redirect('/')
 
 @app.route('/logout/')
 def logout_page():
@@ -42,6 +57,12 @@ def loggedout_page():
 @login_required
 def write_entry():
     todays_date = datetime.date.today()
+    
+    todays_date_local = tz.tzlocal()
+    
+    print "today's local date %s", todays_date_local
+    print "today's local time %s", time.localtime()
+    
     username = users.get_current_user()
     
     form = My3PagesEntryForm()
@@ -61,6 +82,7 @@ def write_entry():
  
     if request.method == 'GET':
         # Display the existing entry in the form if it exists
+        # Convert the daily entry in to a format the form can read
         form.daily_entry.process_data(entry.daily_entry)
     
         return render_template('write.html', form=form, entry = entry, username=username)

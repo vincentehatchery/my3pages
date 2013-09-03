@@ -15,23 +15,37 @@
 			<div class="navbar">
 				<nav id="menu">
 					{% if not username %}
+					{% set action = "login" %}
 					{% set username = "guest" %}
+					{% else %}
+					{% set action = "logout" %}
 					{% endif %}
 					<ul>
 						<li><a class="logo" href="/">My 3 Pages</a>
-							<ul>
-								<li><a href="/">about</a></li>
-								<li><a href="/feedback">feedback</a></li>
-							</ul>
-						<li><a href="/write">Write</a>
-						<li><a href="/previous_entries">Previous entries</a>
-						<li><a href="/inspiration">Inspiration</a>
-						<li><a href="#" id="submenu">{{ username }}</a>
-							<ul>
-								<li><a href="/logout">logout</a></li>
-							</ul>
-						</li>	
 							
+						<li><a href="#">{{ '[%s]	' % username if username }}</a>
+							<ul>
+								<li><a href="/{{ action }}">{{ action }}</a></li>
+							
+							</ul>
+						<li><a href="#">write</a>
+							<ul>
+								<li><a href="/write">write today's entry</a>
+								<li><a href="/previous_entries">previous entries</a>
+								<li><a href="/inspiration">inspiration</a>
+							</ul>
+							
+					
+						
+						</li>	
+						<li><a href="#">about</a>	
+							<ul>
+								<li><a href="/about">about this site</a>
+								<li><a href="/feedback">contact & feedback</a>
+							
+							</ul>
+									
+					
 					</ul>
 					</nav>
 					
