@@ -12,12 +12,16 @@
 	
 		{{ form.daily_entry|safe }}
 	
-		</p>
-		<p>You've written<span id="finalcount" class="stats">0</span> words so far.</p>
+		<p>You've written <span id="finalcount" class="stats">0</span> words so far out of 3 pages (750 words).</p>
 		
 	
 		<div id="progressbar"><span class="progress-label">% complete</span></div>
-	
+		
+		<!--p>Date:<input type='text' id="todays_date" name="date_entered"/></input></p>
+		-->
+		Date: {{ form.date_entered }}
+		
+		<!-- input type=text id="todays_date" name="date_entered">{{ form.date_entered }} -->
 		<p>
 			<input id="save_button" type="submit" value ="save"/>
 		</p>

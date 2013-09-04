@@ -57,11 +57,11 @@ def loggedout_page():
 @login_required
 def write_entry():
     todays_date = datetime.date.today()
-    
+
     #todays_date_local = tz.tzlocal()
     
     #print "today's local date %s", todays_date_local
-    #print "today's local time %s", time.localtime()
+    print "today's local time %s", time.localtime()
     
     username = users.get_current_user()
     
@@ -92,7 +92,7 @@ def write_entry():
         #form = My3PagesEntryForm()
         if form.validate_on_submit():
             entry.daily_entry = form['daily_entry'].data
-            
+            print "This is the form.date_entered %s", form['date_entered'].data
             entry.put()
             todays_datetime = datetime.datetime.today()
             flash(u"Entry last saved:%s" % (todays_datetime))
