@@ -73,6 +73,7 @@ def write_entry():
     if (result == None):
         # Create a new entry
         entry = My3PagesEntry(username = users.get_current_user(), date_entered = datetime.date.today())
+        #form.date_entered = datetime.date.today()
     else:
         entry = result
         # http://stackoverflow.com/questions/5117479/wtforms-how-to-prepopulate-a-textarea-field
@@ -90,7 +91,6 @@ def write_entry():
     elif request.method == 'POST':
         #form = My3PagesEntryForm()
         if form.validate_on_submit():
-            
             entry.daily_entry = form['daily_entry'].data
             
             entry.put()

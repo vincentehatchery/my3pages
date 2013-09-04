@@ -16,11 +16,12 @@ $(function() {
         $('#finalcount').html(finalCount);
         percentComplete = finalCount/750*100;
         percentComplete = percentComplete.toFixed(2);
-        $('#percent_complete').html(percentComplete);
+       // $('#percent_complete').html(percentComplete);
         
   
         $("#progressbar").progressbar("value", parseInt(percentComplete));
-        progressLabel.text( progressbar.progressbar( "value" ) + "%" );
+        $('.progress-label').text(percentComplete + '% complete');
+        //progressLabel.text( progressbar( "value" ) + "% complete" );
         
     }).keyup();
 });

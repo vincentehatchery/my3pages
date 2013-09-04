@@ -1,22 +1,27 @@
 {% extends "base.html" %}
 
 {% block content %}
-	<h2>Welcome back - please begin typing</h2>
+	<h2>Welcome!  Please begin typing.</span></h2>
 	
-	<p> Entry for : {{ entry.date_entered }} </p>
-	<span id="finalcount" class="stats">0</span><span> words written and </span><span id='percent_complete' class="stats"></span><span> % complete</span>
+	<h3>This is the entry for: {{ entry.date_entered }}</h3>
+	
 	<form action="{{ url_for('write_entry') }}" method="post" accept-charset="utf-8">
 		{{ form.csrf_token }}
-		<p>
+		
+		
 	
 		{{ form.daily_entry|safe }}
 	
 		</p>
-		<div id="progressbar"><div class="progress-label">Progress...</div></div>
+		<p>You've written<span id="finalcount" class="stats">0</span> words so far.</p>
+		
+	
+		<div id="progressbar"><span class="progress-label">% complete</span></div>
 	
 		<p>
 			<input id="save_button" type="submit" value ="save"/>
 		</p>
 	</form>
+	<script src=/static/js/display_date.js></script>
 	
 {% endblock %}
