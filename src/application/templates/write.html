@@ -7,8 +7,6 @@
 	
 	<form action="{{ url_for('write_entry') }}" method="post" accept-charset="utf-8">
 		{{ form.csrf_token }}
-		
-		
 	
 		{{ form.daily_entry|safe }}
 	
@@ -19,13 +17,34 @@
 		
 		<!--p>Date:<input type='text' id="todays_date" name="date_entered"/></input></p>
 		-->
-		Date: {{ form.date_entered }}
+		{{ form.date_entered(readonly=true) }}
 		
 		<!-- input type=text id="todays_date" name="date_entered">{{ form.date_entered }} -->
 		<p>
 			<input id="save_button" type="submit" value ="save"/>
 		</p>
 	</form>
+				<div id="flashed_messages">
+			{% with messages = get_flashed_messages() %}
+  			{% if messages %}
+    			{% for message in messages %}
+    		
+    			<div id="message" href=#>{{ message }}</div>
+    			
+      			
+    			{% endfor %}
+    		{% endif %}
+			{% endwith %}		
+			</div>	
+			{% if form.errors %}
+	    		<ul id="errors">
+	      		{% for field_name, field_errors in form.errors|dictsort if field_errors %}
+	            	{% for error in field_errors %}
+	                	<li>{{ form[field_name].label }}: {{ error }}</li>
+	            	{% endfor %}
+	        	{% endfor %}
+	        	</ul>
+        	{% endif %}
 	<script src=/static/js/display_date.js></script>
 	
 {% endblock %}

@@ -61,7 +61,7 @@ def write_entry():
     #todays_date_local = tz.tzlocal()
     
     #print "today's local date %s", todays_date_local
-    print "today's local time %s", time.localtime()
+    #print "today's local time %s", time.localtime()
     
     username = users.get_current_user()
     
@@ -89,13 +89,15 @@ def write_entry():
         return render_template('write.html', form=form, entry = entry, username=username)
     
     elif request.method == 'POST':
-        #form = My3PagesEntryForm()
-        if form.validate_on_submit():
+        form = My3PagesEntryForm(request.form)
+           
+        if form.validate():
             entry.daily_entry = form['daily_entry'].data
-            print "This is the form.date_entered %s", form['date_entered'].data
             entry.put()
-            todays_datetime = datetime.datetime.today()
-            flash(u"Entry last saved:%s" % (todays_datetime))
+            flash(u"Entry saved successfully")
+            return render_template('write.html',form=form, entry = entry, username=username)
+        else:
+            flash("Please correct the below errors:")
             return render_template('write.html',form=form, entry = entry, username=username)
         
 @app.route('/previous_entries/')
