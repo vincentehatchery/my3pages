@@ -15,7 +15,7 @@ class My3PagesEntryForm(Form):
     daily_entry = TextAreaField('DailyEntry', [
         validators.DataRequired()
     ])
-    date_entered = TextField('DailyEntered', validators=[validators.Required()])
+    date_entered = TextField('DateEntered', [validators.DataRequired()])
 
 
 """

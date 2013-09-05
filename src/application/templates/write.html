@@ -1,9 +1,8 @@
 {% extends "base.html" %}
-
 {% block content %}
-	<h2>Welcome!  Please begin typing.</span></h2>
-	
-	<h3>This is the entry for: {{ entry.date_entered }}</h3>
+
+	<h2>Welcome! Please begin typing.</h2>
+	<p>This is the daily entry for: <span class="stats">{{ entry.date_entered }}</span>.</p>
 	
 	<form action="{{ url_for('write_entry') }}" method="post" accept-charset="utf-8">
 		{{ form.csrf_token }}
@@ -15,11 +14,7 @@
 	
 		<div id="progressbar"><span class="progress-label">% complete</span></div>
 		
-		<!--p>Date:<input type='text' id="todays_date" name="date_entered"/></input></p>
-		-->
-		{{ form.date_entered(readonly=true) }}
-		
-		<!-- input type=text id="todays_date" name="date_entered">{{ form.date_entered }} -->
+		<div>{{ form.date_entered(readonly=true) }}</div>
 		<p>
 			<input id="save_button" type="submit" value ="save"/>
 		</p>
@@ -45,6 +40,7 @@
 	        	{% endfor %}
 	        	</ul>
         	{% endif %}
-	<script src=/static/js/display_date.js></script>
+		
+		
 	
 {% endblock %}

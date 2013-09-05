@@ -26,7 +26,8 @@ cache = Cache(app)
 @app.route('/')
 def home_page():
     username = users.get_current_user()
-    return render_template('index.html', username=username)
+    form = My3PagesEntryForm(request.form)
+    return render_template('index.html', username=username, form=form)
 
 @app.route('/about/')
 def about_page():
@@ -56,16 +57,17 @@ def loggedout_page():
 @app.route('/write/', methods = ['GET', 'POST'])
 @login_required
 def write_entry():
-    todays_date = datetime.date.today()
-
-    #todays_date_local = tz.tzlocal()
-    
-    #print "today's local date %s", todays_date_local
-    #print "today's local time %s", time.localtime()
-    
     username = users.get_current_user()
     
-    form = My3PagesEntryForm()
+    form = My3PagesEntryForm(request.form)
+    #Get today's date from javascript
+    js_todays_date = form['date_entered'].data
+  #  todays_datetime = datetime.datetime.fromtimestamp(js_todays_date/1000.0)
+   
+    print "todays date is begin", js_todays_date
+#     print "todays_datetime is begin", todays_datetime
+    todays_date = datetime.date.today()
+    print "todays_date", todays_date
 
     #Determine if entry already exists
     result = My3PagesEntry.gql("WHERE username = :username AND date_entered =:todays_date", username = username, todays_date=todays_date).get()
@@ -89,26 +91,59 @@ def write_entry():
         return render_template('write.html', form=form, entry = entry, username=username)
     
     elif request.method == 'POST':
-        form = My3PagesEntryForm(request.form)
+        #Get the form again
            
         if form.validate():
+            js_todays_date = form['date_entered'].data
+           # print "todays date is post", js_todays_date
+           # python_todays_date = float(js_todays_date)/1000
+          #  print "pythons todays date is post", python_todays_date
+          #  new_todays_date = python_todays_date
+            
             entry.daily_entry = form['daily_entry'].data
             entry.put()
-            flash(u"Entry saved successfully")
+            flash("Entry saved successfully")
             return render_template('write.html',form=form, entry = entry, username=username)
         else:
             flash("Please correct the below errors:")
             return render_template('write.html',form=form, entry = entry, username=username)
         
+@app.route('/write_new/', methods = ['GET','POST'])
+@login_required
+def write_new():
+    """
+    Retrieve the entry for this username for the specific date and populate the form
+    """
+    form = My3PagesEntryForm(request.form)
+    username = users.get_current_user()
+    string_date = form['date_entered'].data
+    #specific_date = string_date
+    specific_date = datetime.datetime.strptime(string_date, '%Y-%m-%d').date()
+    
+    print "The specific date is", specific_date
+    
+    result = My3PagesEntry.gql("WHERE username = :username AND date_entered =:specific_date", username = username, specific_date = specific_date).get()
+    if (result == None):
+        # Create a new entry and blank form
+        entry = My3PagesEntry(username = users.get_current_user(), date_entered = specific_date)
+        print "found no match"
+    else:
+        entry = result
+        form.daily_entry.process_data(entry.daily_entry)
+        print "found match"
+        
+    return render_template('write.html', form=form, entry = entry, username=username)
+
 @app.route('/previous_entries/')
 @login_required
-def previous_enties():
+def previous_entries():
     
     username = users.get_current_user()
     
     entries = My3PagesEntry.gql("WHERE username =:username", username = username)
     
     return render_template('previous_entries.html', entries = entries, username=username)
+
     
 @app.route('/inspiration/')
 def inspiration_page():
