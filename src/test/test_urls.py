@@ -46,12 +46,12 @@ class Test(unittest.TestCase):
 
     def test_feedback_page(self):
         rv = self.app.get('/feedback', follow_redirects=True)
-        assert 'Feedback And Ways To Contact Me' in rv.data
+        assert 'Feedback and Contact' in rv.data
         
     def test_write_page(self):
         setCurrentUser('test@example.com', 'testuser')
         rv = self.app.get('/write', follow_redirects=True)
-        assert 'Welcome back' in rv.data
+        assert 'Welcome' in rv.data
 
     def test_post_write_page(self):
         setCurrentUser('test@example.com', 'testuser')

@@ -131,7 +131,9 @@ article {
 td a:link {
 	color: black;
 }
-
+p a:link, p a:visited{
+	color:red;
+}
 textarea {
 	float: none;
 	font-size: 1em;

@@ -9,13 +9,13 @@ forms.py:
 
 #from flaskext import wtf
 #from flaskext.wtf import validators
-from wtforms import Form, validators, TextAreaField, TextField
+from wtforms import Form, validators, TextAreaField, DateField
 
 class My3PagesEntryForm(Form):
     daily_entry = TextAreaField('DailyEntry', [
         validators.DataRequired()
     ])
-    date_entered = TextField('DateEntered', [validators.DataRequired()])
+    date_entered = DateField('DateEntered', [validators.DataRequired()])
 
 
 """

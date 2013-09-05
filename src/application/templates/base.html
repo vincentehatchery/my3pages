@@ -20,6 +20,9 @@
 					{% else %}
 					{% set action = "logout" %}
 					{% endif %}
+					<form id="frm1" action="{{ url_for('write_entry') }}" method="get" accept-charset="utf-8">
+										{{ form.date_entered }}
+					</form>
 					<ul>
 						<li><a class="logo" href="/">My 3 Pages</a>
 							
@@ -30,7 +33,11 @@
 							</ul>
 						<li><a href="#">write</a>
 							<ul>
-								<li><a href="/write">write today's entry</a>
+								<li>
+									<!-- This is code allows the client's LOCAL date to be submitted to the server for processing. -->
+									
+										<a href="#" onclick="document.getElementById('frm1').submit();">write today's entry</a>
+									
 								<li><a href="/previous_entries">previous entries</a>
 								<li><a href="/inspiration">inspiration</a>
 							</ul>

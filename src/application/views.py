@@ -32,7 +32,9 @@ def home_page():
 @app.route('/about/')
 def about_page():
     username = users.get_current_user()
-    return render_template('about.html', username=username)
+    form = My3PagesEntryForm(request.form)
+    
+    return render_template('about.html', username=username, form=form)
 
 @app.route('/login/')
 def login_page():
@@ -60,21 +62,29 @@ def write_entry():
     username = users.get_current_user()
     
     form = My3PagesEntryForm(request.form)
-    #Get today's date from javascript
-    js_todays_date = form['date_entered'].data
+    #Get today's date from the query string
+    qs_todays_date = request.args.get('date_entered')
+    
+    if (qs_todays_date == None):
+        # query string is empty, assign todays_date to be the server's date
+        todays_date = datetime.date.today()
+    else:
+        todays_date = datetime.datetime.strptime(qs_todays_date, '%Y-%m-%d').date()
+        
+    #js_todays_date = form['date_entered'].data
   #  todays_datetime = datetime.datetime.fromtimestamp(js_todays_date/1000.0)
    
-    print "todays date is begin", js_todays_date
+   # print "todays date is begin", qs_todays_date
 #     print "todays_datetime is begin", todays_datetime
-    todays_date = datetime.date.today()
-    print "todays_date", todays_date
+    
+    #print "todays_date", todays_date
 
     #Determine if entry already exists
     result = My3PagesEntry.gql("WHERE username = :username AND date_entered =:todays_date", username = username, todays_date=todays_date).get()
 
     if (result == None):
         # Create a new entry
-        entry = My3PagesEntry(username = users.get_current_user(), date_entered = datetime.date.today())
+        entry = My3PagesEntry(username = users.get_current_user(), date_entered = todays_date)
         #form.date_entered = datetime.date.today()
     else:
         entry = result
@@ -134,30 +144,57 @@ def write_new():
         
     return render_template('write.html', form=form, entry = entry, username=username)
 
+@app.route('/write/?date_entered=<specific_date>', methods = ['GET','POST'])
+@login_required
+def write_specific_date(specific_date):
+    """
+    Retrieve the entry for this username for the specific date and populate the form
+    """
+    form = My3PagesEntryForm(request.form)
+    username = users.get_current_user()
+    #string_date = form['date_entered'].data
+    #specific_date = string_date
+    #specific_date = datetime.datetime.strptime(string_date, '%Y-%m-%d').date()
+    
+    print "The specific date is", specific_date
+    
+    result = My3PagesEntry.gql("WHERE username = :username AND date_entered =:specific_date", username = username, specific_date = specific_date).get()
+    if (result == None):
+        # Create a new entry and blank form
+        entry = My3PagesEntry(username = users.get_current_user(), date_entered = specific_date)
+        print "found no match"
+    else:
+        entry = result
+        form.daily_entry.process_data(entry.daily_entry)
+        print "found match"
+        
+    return render_template('write.html', form=form, entry = entry, username=username)
+
+
 @app.route('/previous_entries/')
 @login_required
 def previous_entries():
-    
+    form = My3PagesEntryForm(request.form)
     username = users.get_current_user()
     
     entries = My3PagesEntry.gql("WHERE username =:username", username = username)
     
-    return render_template('previous_entries.html', entries = entries, username=username)
+    return render_template('previous_entries.html', entries = entries, username=username, form=form)
 
     
 @app.route('/inspiration/')
 def inspiration_page():
     
     username = users.get_current_user()
-    
-    return render_template('inspiration.html', username=username)
+    form = My3PagesEntryForm(request.form)
+    return render_template('inspiration.html', username=username, form=form)
 
 @app.route('/feedback/')
 def feedback_page():
     
     username = users.get_current_user()
-    
-    return render_template('feedback.html', username=username)
+    form = My3PagesEntryForm(request.form)
+    return render_template('feedback.html', username=username, form=form)
  
 @app.route('/previous_entries/<int:entry_id>')
 def previous_entries_edit(entry_id):
