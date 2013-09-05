@@ -52,8 +52,9 @@ def logout_page():
 
 @app.route('/logged_out/')
 def loggedout_page():
+    form = My3PagesEntryForm(request.form)
     if not users.get_current_user():
-        return  render_template('logged_out.html')
+        return  render_template('logged_out.html', form=form)
 
 
 @app.route('/write/', methods = ['GET', 'POST'])
@@ -62,9 +63,11 @@ def write_entry():
     username = users.get_current_user()
     
     form = My3PagesEntryForm(request.form)
+    
+    
     #Get today's date from the query string
     qs_todays_date = request.args.get('date_entered')
-    
+
     if (qs_todays_date == None):
         # query string is empty, assign todays_date to be the server's date
         todays_date = datetime.date.today()
@@ -104,7 +107,7 @@ def write_entry():
         #Get the form again
            
         if form.validate():
-            js_todays_date = form['date_entered'].data
+            
            # print "todays date is post", js_todays_date
            # python_todays_date = float(js_todays_date)/1000
           #  print "pythons todays date is post", python_todays_date

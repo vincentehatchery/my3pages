@@ -4,7 +4,7 @@
 	<h2>Welcome! Please begin writing.</h2>
 	<p>Entry date: <span class="stats">{{ entry.date_entered.strftime('%A, %d %B %Y') }}</span>.</p>
 	
-	<form action="{{ url_for('write_entry') }}" method="post" accept-charset="utf-8">
+	<form action="{{ url_for('write_entry', date_entered=entry.date_entered) }}" method="post" accept-charset="utf-8">
 		{{ form.csrf_token }}
 	
 		{{ form.daily_entry|safe }}
@@ -13,8 +13,7 @@
 		
 	
 		<div id="progressbar"><span class="progress-label">% complete</span></div>
-		
-		<div>{{ form.date_entered(readonly=true) }}</div>
+	
 		<p>
 			<input id="save_button" type="submit" value ="save"/>
 		</p>
