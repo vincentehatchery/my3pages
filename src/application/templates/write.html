@@ -1,44 +1,25 @@
 {% extends "base.html" %}
 {% block content %}
-
-	<h2>Welcome! Please begin writing.</h2>
-	<p>Entry date: <span class="stats">{{ entry.date_entered.strftime('%A, %d %B %Y') }}</span>.</p>
-	
+	<p id="writer-header">		
+	Entry date: <span class="stats">{{ entry.date_entered.strftime('%A, %d %B %Y') }}</span>.<span id="words-written">Word count: <span id="finalcount" class="stats">0</span></p>
+			
+			
 	<form action="{{ url_for('write_entry', date_entered=entry.date_entered) }}" method="post" accept-charset="utf-8">
 		{{ form.csrf_token }}
 	
 		{{ form.daily_entry|safe }}
-	
-		<p>You've written <span id="finalcount" class="stats">0</span> words so far out of 3 pages (750 words).</p>
-		
-	
-		<div id="progressbar"><span class="progress-label">% complete</span></div>
-	
+	<br>
+	<br>
+	<div id="progressbar"><span class="progress-label">% complete</span></div>
+	<br>
+	<input id="save_button" type="submit" value ="save"/>
+	</div><!-- writers-page -->
 		<p>
-			<input id="save_button" type="submit" value ="save"/>
 		</p>
+		
 	</form>
-				<div id="flashed_messages">
-			{% with messages = get_flashed_messages() %}
-  			{% if messages %}
-    			{% for message in messages %}
-    		
-    			<div id="message" href=#>{{ message }}</div>
-    			
-      			
-    			{% endfor %}
-    		{% endif %}
-			{% endwith %}		
-			</div>	
-			{% if form.errors %}
-	    		<ul id="errors">
-	      		{% for field_name, field_errors in form.errors|dictsort if field_errors %}
-	            	{% for error in field_errors %}
-	                	<li>{{ form[field_name].label }}: {{ error }}</li>
-	            	{% endfor %}
-	        	{% endfor %}
-	        	</ul>
-        	{% endif %}
+	
+			
 		
 		
 	

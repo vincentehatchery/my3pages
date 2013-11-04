@@ -59,16 +59,57 @@
 			</div>
 		</header>
 		
-		
+		<section id="left-sidebar">
+			{% if username == 'guest' %}
+				<p>Welcome guest! Feel free to write whatever you want and earn stamps on the way!</p>
+				
+				<p>If you would like to save your entry you will need to <a href="/login">sign in</a> first.</p>
+				<p>Happy writing!</p>
+			{% else %}   	
+				<div>Welcome {{ username }}! Please begin writing.</div>
+			{% endif %}
+			<br>
+			<div id="flashed_messages">
+			{% with messages = get_flashed_messages() %}
+  			{% if messages %}
+    			{% for message in messages %}
+    		
+    			<div id="message" href=#>{{ message }}</div>
+    			
+      			
+    			{% endfor %}
+    		{% endif %}
+			{% endwith %}
+					
+			</div>	
+			{% if form.errors %}
+	    		<ul id="errors">
+	      		{% for field_name, field_errors in form.errors|dictsort if field_errors %}
+	            	{% for error in field_errors %}
+	                	<li>{{ form[field_name].label }}: {{ error }}</li>
+	            	{% endfor %}
+	        	{% endfor %}
+	        	</ul>
+        	{% endif %}
+		</section>
 		<article>
+		<div id="typewriter">
 			{% block content %}
 			{% endblock %}
-
+		</div>
+		
     		
 		</article>
-		 
+		<section id="right-sidebar">
+			<div>Upcoming feature - STAMPS you can earn:</div>
+			<img src="/static/images/stamp-3.png">
+			<img src="/static/images/frog-64.png">
+		</section>
+	
+		
 		 <footer>
 	        <div id="footer" class="container">
+	     
 	        	{% block footer %}{% endblock %}
 	           	<script>
 					(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){

@@ -5,6 +5,10 @@ Created on Aug 14, 2013
 
 forms.py:
     This module borrows from Flask-WTF and its built-in validation
+    
+    The form contains two entries:
+    1) daily_entry : a text area for typing the user's 3 pages
+    2) date_entered : a hidden entry used to display the client date not the server date.  See the javascript file display_date.js
 '''
 
 #from flaskext import wtf
@@ -18,11 +22,3 @@ class My3PagesEntryForm(Form):
     date_entered = TextField('DateEntered')
 
 
-"""
-class My3PagesEntryForm(wtf.Form):
-    daily_entry = wtf.TextAreaField('DailyEntry', [
-        validators.Required(message="The entry can't be empty"),
-        validators.EqualTo('confirm', message='Passwords must match')
-    ])
-    date_entered = wtf.TextField('DailyEntered', validators=[validators.Required()])
-"""

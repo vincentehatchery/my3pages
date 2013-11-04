@@ -14,7 +14,7 @@ from forms import My3PagesEntryForm
 from flask import render_template, request, flash, redirect
 import datetime
 #from dateutil import tz
-import time
+#import time
 from flask_cache import Cache
 from google.appengine.api import users
 
@@ -25,9 +25,11 @@ cache = Cache(app)
 
 @app.route('/')
 def home_page():
-    username = users.get_current_user()
-    form = My3PagesEntryForm(request.form)
-    return render_template('index.html', username=username, form=form)
+    #username = users.get_current_user()
+    #form = My3PagesEntryForm(request.form)
+    #return render_template('index.html', username=username, form=form)
+        
+    return redirect('/write')
 
 @app.route('/about/')
 def about_page():
@@ -58,7 +60,7 @@ def loggedout_page():
 
 
 @app.route('/write/', methods = ['GET', 'POST'])
-@login_required
+#@login_required
 def write_entry():
     username = users.get_current_user()
     
@@ -87,7 +89,7 @@ def write_entry():
 
     if (result == None):
         # Create a new entry
-        entry = My3PagesEntry(username = users.get_current_user(), date_entered = todays_date)
+        entry = My3PagesEntry(username = username, date_entered = todays_date)
         #form.date_entered = datetime.date.today()
     else:
         entry = result
@@ -114,6 +116,10 @@ def write_entry():
           #  new_todays_date = python_todays_date
             
             entry.daily_entry = form['daily_entry'].data
+            if not users.get_current_user():
+            # redirect the user to create a google login
+                return redirect(users.create_login_url(request.url))
+        
             entry.put()
             flash("Entry saved successfully")
             return render_template('write.html',form=form, entry = entry, username=username)
@@ -149,6 +155,7 @@ def write_new():
 
 @app.route('/write/?date_entered=<specific_date>', methods = ['GET','POST'])
 @login_required
+#TODO Ensure that only the user who created the entry can access their entry
 def write_specific_date(specific_date):
     """
     Retrieve the entry for this username for the specific date and populate the form
@@ -180,7 +187,7 @@ def previous_entries():
     form = My3PagesEntryForm(request.form)
     username = users.get_current_user()
     
-    entries = My3PagesEntry.gql("WHERE username =:username", username = username)
+    entries = My3PagesEntry.gql("WHERE username =:username ORDER BY date_entered DESC", username = username)
     
     return render_template('previous_entries.html', entries = entries, username=username, form=form)
 
