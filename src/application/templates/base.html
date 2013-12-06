@@ -5,7 +5,7 @@
 		<title>{% block title %}My 3 Pages{% endblock %}</title>
 		<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
 		<link href="/static/css/main.css" rel=stylesheet>
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+		<script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
 		<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
 		
 	</head>
@@ -57,18 +57,34 @@
 					</nav>
 					
 			</div>
+			<script src="/static/js/jquery.autoSave.js"></script>
+    
+			<script type="text/javascript">
+
+  				var _gaq = _gaq || [];
+  					_gaq.push(['_setAccount', 'UA-43478549-1']);
+  					_gaq.push(['_trackPageview']);
+
+  				(function() {
+    				var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    				ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    				var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  				})();
+
+			</script>
 		</header>
 		
 		<section id="left-sidebar">
 			{% if username == 'guest' %}
 				<p>Welcome guest! Feel free to write whatever you want and earn stamps on the way!</p>
-				
-				<p>If you would like to save your entry you will need to <a href="/login">sign in</a> first.</p>
+				<p>If you would like to save your entry to the server you will need to <a href="/login">sign in</a> first.</p>
 				<p>Happy writing!</p>
 			{% else %}   	
 				<div>Welcome {{ username }}! Please begin writing.</div>
 			{% endif %}
 			<br>
+			<div id="msg"></div>
+			
 			<div id="flashed_messages">
 			{% with messages = get_flashed_messages() %}
   			{% if messages %}
@@ -91,6 +107,7 @@
 	        	{% endfor %}
 	        	</ul>
         	{% endif %}
+        	
 		</section>
 		<article>
 		<div id="typewriter">
@@ -101,27 +118,18 @@
     		
 		</article>
 		<section id="right-sidebar">
-			<div>Upcoming feature - STAMPS you can earn:</div>
+			<div>Upcoming feature:</div>
+			<div> - STAMPS you can earn:</div>
 			<img src="/static/images/stamp-3.png">
 			<img src="/static/images/frog-64.png">
 		</section>
 	
 		
-		 <footer>
-	        <div id="footer" class="container">
+		    <div id="footer" class="container">
 	     
 	        	{% block footer %}{% endblock %}
-	           	<script>
-					(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-				  	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-				  	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-				  	})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-				  	ga('create', 'UA-43478549-1', 'my3pages.appspot.com');
-				  	ga('send', 'pageview');
-				</script>
 	        </div><!-- /footer -->
-    	</footer>
-		
+    	
 	    <script src="/static/js/jquery.wordcount.js"></script>
 	    <script src=/static/js/display_date.js></script>
 			

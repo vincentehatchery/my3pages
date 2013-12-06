@@ -6,12 +6,12 @@ Created on Aug 14, 2013
 Description: This module details the urls and views associated with my3pages
 
 '''
-
+import os
 from application import app
 from decorators import login_required
 from models import My3PagesEntry
 from forms import My3PagesEntryForm
-from flask import render_template, request, flash, redirect
+from flask import render_template, request, flash, redirect, send_from_directory
 import datetime
 #from dateutil import tz
 #import time
@@ -22,6 +22,11 @@ from google.appengine.api import users
     
 
 cache = Cache(app)
+
+@app.route('/favicon.ico')
+def favicon():
+    return send_from_directory(os.path.join(app.root_path, 'static/images'),
+                               'favicon.ico', mimetype='image/vnd.microsoft.icon')
 
 @app.route('/')
 def home_page():
@@ -139,7 +144,7 @@ def write_new():
     #specific_date = string_date
     specific_date = datetime.datetime.strptime(string_date, '%Y-%m-%d').date()
     
-    print "The specific date is", specific_date
+    #print "The specific date is", specific_date
     
     result = My3PagesEntry.gql("WHERE username = :username AND date_entered =:specific_date", username = username, specific_date = specific_date).get()
     if (result == None):
@@ -166,7 +171,7 @@ def write_specific_date(specific_date):
     #specific_date = string_date
     #specific_date = datetime.datetime.strptime(string_date, '%Y-%m-%d').date()
     
-    print "The specific date is", specific_date
+    #print "The specific date is", specific_date
     
     result = My3PagesEntry.gql("WHERE username = :username AND date_entered =:specific_date", username = username, specific_date = specific_date).get()
     if (result == None):
