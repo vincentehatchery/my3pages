@@ -7,10 +7,40 @@
 		<link href="/static/css/main.css" rel=stylesheet>
 		<script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
 		<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
+		<link rel="icon" href="images/favicon.ico" type="image/x-icon">
 		
 	</head>
 		
 	<body>
+		<div id="header-background"></div>
+		<section id="left-sidebar">
+			
+			
+			<div id="flashed_messages">
+			{% with messages = get_flashed_messages() %}
+  			{% if messages %}
+    			{% for message in messages %}
+    		
+    			<div id="message" href=#>{{ message }}</div>
+    			
+      			
+    			{% endfor %}
+    		{% endif %}
+			{% endwith %}
+					
+			</div>	
+			{% if form.errors %}
+	    		<ul id="errors">
+	      		{% for field_name, field_errors in form.errors|dictsort if field_errors %}
+	            	{% for error in field_errors %}
+	                	<li>{{ form[field_name].label }}: {{ error }}</li>
+	            	{% endfor %}
+	        	{% endfor %}
+	        	</ul>
+        	{% endif %}
+        	
+		</section>
+		<div id="wrapper">
 		<header>
 			<div class="navbar">
 				<nav id="menu">
@@ -26,7 +56,7 @@
 					<ul>
 						<li><a class="logo" href="/">My 3 Pages</a>
 							
-						<li><a href="#">{{ '[%s]	' % username if username }}</a>
+						<li><a href="#" id="welcome">Welcome {{ '%s	' % username if username }}</a>
 							<ul>
 								<li><a href="/{{ action }}">{{ action }}</a></li>
 							
@@ -74,41 +104,7 @@
 			</script>
 		</header>
 		
-		<section id="left-sidebar">
-			{% if username == 'guest' %}
-				<p>Welcome guest! Feel free to write whatever you want and earn stamps on the way!</p>
-				<p>If you would like to save your entry to the server you will need to <a href="/login">sign in</a> first.</p>
-				<p>Happy writing!</p>
-			{% else %}   	
-				<div>Welcome {{ username }}! Please begin writing.</div>
-			{% endif %}
-			<br>
-			<div id="msg"></div>
-			
-			<div id="flashed_messages">
-			{% with messages = get_flashed_messages() %}
-  			{% if messages %}
-    			{% for message in messages %}
-    		
-    			<div id="message" href=#>{{ message }}</div>
-    			
-      			
-    			{% endfor %}
-    		{% endif %}
-			{% endwith %}
-					
-			</div>	
-			{% if form.errors %}
-	    		<ul id="errors">
-	      		{% for field_name, field_errors in form.errors|dictsort if field_errors %}
-	            	{% for error in field_errors %}
-	                	<li>{{ form[field_name].label }}: {{ error }}</li>
-	            	{% endfor %}
-	        	{% endfor %}
-	        	</ul>
-        	{% endif %}
-        	
-		</section>
+		
 		<article>
 		<div id="typewriter">
 			{% block content %}
@@ -132,6 +128,6 @@
     	
 	    <script src="/static/js/jquery.wordcount.js"></script>
 	    <script src=/static/js/display_date.js></script>
-			
+		</div><!--wrapper-->
 	</body>
 </html>

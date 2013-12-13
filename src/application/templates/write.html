@@ -1,45 +1,49 @@
 {% extends "base.html" %}
 {% block content %}
-   	
-	<p id="writer-header">		
-	Entry date: <span id="entry_date" class="stats">{{ entry.date_entered.strftime('%A, %d %B %Y') }}</span>.<span id="words-written">Word count: <span id="finalcount" class="stats">0</span></p>
-			
-			
+<div id="writer-page">
+	<p id="writer-header">
+		Entry date: <span id="entry_date" class="stats">{{ entry.date_entered.strftime('%A, %d %B %Y') }}</span>.<span id="words-written">Word count: <span id="finalcount" class="stats">0</span>
+	</p>
+
 	<form action="{{ url_for('write_entry', date_entered=entry.date_entered) }}" method="post" accept-charset="utf-8">
 		{{ form.csrf_token }}
-	
+
 		{{ form.daily_entry|safe }}
-	<br>
-	<br>
-	<div id="progressbar"><span class="progress-label">% complete</span></div>
-	<br>
-	<input id="save_button" type="submit" value ="save"/>
-	</div><!-- writers-page -->
-		<p>
-		</p>
-		
+		<br>
+		<br>
+		<div id="progressbar">
+			<span class="progress-label">% complete</span>
+		</div>
+		<br>
+		<div id="msg"></div>
+		<input id="save_button" type="submit" value ="upload"/>
+
+		<p></p>
+
 	</form>
 	<script type="text/javascript">
-	   $(function() {
+		$(function() {
 			var daily_entryText = $("#daily_entry");
 			var date_retrieved= '{{ entry.date_entered.strftime('%Y-%m-%d') }}';
 			//  alert('Date entered is in html is:' + date_retrieved);
-			
-			if (localStorage){
-				<!-- var content = localStorage.getItem("autoSave"); -->
+
+			if (localStorage) {
+				<!--
+				var content = localStorage.getItem("autoSave");
+				-->
 				var content = localStorage.getItem(date_retrieved);
-				
+
 				if (content) {
 					daily_entryText.text(content);
 				}
 			}
-			
+
 			daily_entryText.autoSave(function() {
 				var time = showTime();
-				$("#msg").text("Draft Autosaved Locally " + time);
-			
-				}, 500, date_retrieved);
-			
+				$("#msg").text("Local autosave: " + time);
+
+			}, 500, date_retrieved);
+
 			function showTime() {
 				var timeNow = new Date();
 				var hours = timeNow.getHours();
@@ -51,11 +55,10 @@
 				timeString += (hours >= 12) ? " P.M." : " A.M.";
 				return timeString;
 			}
-		}); 
-  
- 	</script>	
-		
-		
-		
-	
+
+		});
+
+	</script>
+
+</div><!-- writers-page -->
 {% endblock %}
